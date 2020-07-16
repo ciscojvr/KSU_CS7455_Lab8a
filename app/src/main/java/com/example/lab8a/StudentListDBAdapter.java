@@ -80,8 +80,8 @@ public class StudentListDBAdapter {
 
         if(cursor!=null &cursor.getCount()>0){
             while(cursor.moveToNext()){
-                buffer.append("Id : " + cursor.getString(0) + "\n");
-                buffer.append("Name: " + cursor.getString(1) + "\n");
+                buffer.append("Id : " + cursor.getString(0) + ", ");
+                buffer.append("Name: " + cursor.getString(1) + ", ");
                 buffer.append("Grade: " + cursor.getString(2) + "\n\n");
             }
         }
