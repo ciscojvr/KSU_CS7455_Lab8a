@@ -23,19 +23,25 @@ public class StudentProvider extends ContentProvider {
     public static final String AUTHORITY = "com.example.lab8a";
 
     public static final String PATH_STUDENT_LIST = "STUDENT_LIST";
+    public static final String PATH_STUDENT_COUNT = "STUDENT_COUNT";
 
     public static final Uri CONTENT_URI_1 = Uri.parse("content://" + AUTHORITY + "/" + PATH_STUDENT_LIST);
+    public static final Uri CONTENT_URI_2 = Uri.parse("content://" + AUTHORITY + "/" + PATH_STUDENT_COUNT);
 
     public static final String CONTENT_TYPE_1 = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + PATH_STUDENT_LIST;
 
     public static final int STUDENT_LIST = 1;
+    public static final int STUDENT_COUNT = 2;
+
     private static final UriMatcher MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
         MATCHER.addURI(AUTHORITY, PATH_STUDENT_LIST, STUDENT_LIST);
+        MATCHER.addURI(AUTHORITY, PATH_STUDENT_COUNT, STUDENT_COUNT);
     }
 
     public static final String MIME_TYPE_1 = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + "vnd.com.lab8a.students";
+    public static final String MIME_TYPE_2 = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + "vnd.com.lab8a.studentcount";
 
     private StudentListDBAdapter studentListDBAdapter;
 
@@ -44,6 +50,7 @@ public class StudentProvider extends ContentProvider {
     public String getType(@NonNull Uri uri) {
         switch (MATCHER.match(uri)) {
             case STUDENT_LIST: return MIME_TYPE_1;
+            case STUDENT_COUNT: return MIME_TYPE_2;
         }
         return null;
     }
@@ -60,6 +67,7 @@ public class StudentProvider extends ContentProvider {
         Cursor cursor = null;
         switch (MATCHER.match(uri)) {
             case STUDENT_LIST: cursor = studentListDBAdapter.getCursorsForAllToDos(); break;
+            case STUDENT_COUNT: cursor = studentListDBAdapter.getCount(); break;
             default: cursor = null; break;
         }
         return cursor;
@@ -70,11 +78,11 @@ public class StudentProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) throws UnsupportedOperationException{
         Uri returnUri = null;
         switch (MATCHER.match(uri)){
-            case STUDENT_LIST: returnUri= insertStudent(uri,contentValues);break;
+            case STUDENT_LIST: returnUri = insertStudent(uri,contentValues);break;
             default: new UnsupportedOperationException("insert operation not supported"); break;
         }
 
-        return returnUri ;
+        return returnUri;
     }
 
     @Override
