@@ -8,7 +8,6 @@ Lab Date: Due July 19, 2020 at 11:59 PM
 
 package com.example.lab8a;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
