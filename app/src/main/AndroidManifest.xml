@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="com.example.lab8a"
+            android:name=".StudentProvider"
+            android:exported="true"/>
     </application>
 
 </manifest>
