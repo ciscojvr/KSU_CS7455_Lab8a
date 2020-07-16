@@ -1,3 +1,10 @@
+/*
+
+Name: Francisco Ozuna Diaz
+Assignment: CS 7455 Lab 8
+Lab Date: Due July 19, 2020 at 11:59 PM
+
+ */
 package com.example.lab8a;
 
 import androidx.appcompat.app.AppCompatActivity;
