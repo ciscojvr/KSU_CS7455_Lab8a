@@ -2,5 +2,4 @@
     <string name="app_name">Lab8a</string>
     <string name="name">Name</string>
     <string name="grade">Grade</string>
-    <string name="no_students_records_in_table">No students records in table...</string>
 </resources>

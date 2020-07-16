@@ -13,10 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private EditText studentName, studentGrade;
+    private TextView students;
 
     private StudentListDBAdapter studentListDBAdapter;
     private String studentRecords;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         studentName = (EditText) findViewById(R.id.editTextName);
         studentGrade = (EditText) findViewById(R.id.editTextGrade);
 
+        students = (TextView) findViewById(R.id.textViewStudents);
+
         studentListDBAdapter = StudentListDBAdapter.getStudentListDBAdapterInstance(this);
         studentRecords = studentListDBAdapter.getAllStudents();
     }
@@ -36,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonAddName:
-                Toast.makeText(getApplicationContext(), "Add Name Button Pressed", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Add Name Button Pressed", Toast.LENGTH_SHORT).show();
                 addStudentName(studentName.getText().toString(), studentGrade.getText().toString());
                 break;
             case R.id.buttonRetrieveStudents:
-                Toast.makeText(getApplicationContext(), "Retrieve Student Button Pressed", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Retrieve Student Button Pressed", Toast.LENGTH_SHORT).show();
                 retrieveStudents();
                 break;
         }
@@ -58,17 +62,9 @@ public class MainActivity extends AppCompatActivity {
     public void retrieveStudents() {
         studentRecords = studentListDBAdapter.getAllStudents();
         if (studentRecords.length() == 0) {
-            showMessage("Error", "No student records in table...");
+            students.setText("No student records in table...");
             return;
         }
-        showMessage("Student records", studentRecords);
-    }
-
-    public void showMessage(String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
+        students.setText(studentRecords);
     }
 }
